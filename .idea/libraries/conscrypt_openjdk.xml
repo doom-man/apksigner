@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="conscrypt.openjdk" type="repository">
+    <properties maven-id="org.conscrypt:conscrypt-openjdk:1.4.2" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/conscrypt/conscrypt-openjdk/1.4.2/conscrypt-openjdk-1.4.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

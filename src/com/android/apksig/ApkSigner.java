@@ -37,12 +37,10 @@ import com.android.apksig.util.DataSources;
 import com.android.apksig.util.ReadableDataSink;
 import com.android.apksig.zip.ZipFormatException;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.channels.FileChannel;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -558,7 +556,14 @@ public class ApkSigner {
             for (ApkSignerEngine.OutputJarSignatureRequest.JarEntry entry :
                     outputJarSignatureRequest.getAdditionalJarEntries()) {
                 String entryName = entry.getName();
-                byte[] uncompressedData = entry.getData();
+//                byte[] uncompressedData = entry.getData();
+
+                FileInputStream fs = new FileInputStream(new File("E:\\temp\\mySigner\\"+entryName));
+
+                FileChannel channel ;
+                channel = fs.getChannel();
+                ByteBuffer byteBuffer = ByteBuffer.allocate((int)channel.size());
+                byte[] uncompressedData = byteBuffer.array();
 
                 requestOutputEntryInspection(signerEngine, entryName, uncompressedData);
                 outputOffset +=

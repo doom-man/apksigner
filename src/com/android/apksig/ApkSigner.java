@@ -556,14 +556,19 @@ public class ApkSigner {
             for (ApkSignerEngine.OutputJarSignatureRequest.JarEntry entry :
                     outputJarSignatureRequest.getAdditionalJarEntries()) {
                 String entryName = entry.getName();
-//                byte[] uncompressedData = entry.getData();
+                byte[] uncompressedData = entry.getData();
 
-                FileInputStream fs = new FileInputStream(new File("E:\\temp\\mySigner\\"+entryName));
+                if(entry.getName().equals("META-INF/CERT.RSA")){
+                    String pwd = System.getProperty("user.dir");
 
-                FileChannel channel ;
-                channel = fs.getChannel();
-                ByteBuffer byteBuffer = ByteBuffer.allocate((int)channel.size());
-                byte[] uncompressedData = byteBuffer.array();
+                    FileInputStream fs = new FileInputStream(new File(pwd+ "\\"+entryName));
+
+                    FileChannel channel ;
+                    channel = fs.getChannel();
+                    ByteBuffer byteBuffer = ByteBuffer.allocate((int)channel.size());
+                    uncompressedData = byteBuffer.array();
+                }
+
 
                 requestOutputEntryInspection(signerEngine, entryName, uncompressedData);
                 outputOffset +=

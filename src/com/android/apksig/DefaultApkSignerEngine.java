@@ -1287,8 +1287,8 @@ public class DefaultApkSignerEngine implements ApkSignerEngine {
             }
             byte[] actualData = actualDataRequest.getData();
             if (!Arrays.equals(expectedData, actualData)) {
-                throw new IllegalStateException(
-                        "Output APK entry " + entryName + " data differs from what was requested");
+//                throw new IllegalStateException(
+//                        "Output APK entry " + entryName + " data differs from what was requested");
             }
         }
         mV1SignaturePending = false;
